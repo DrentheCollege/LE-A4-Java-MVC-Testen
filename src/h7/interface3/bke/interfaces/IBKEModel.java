@@ -1,6 +1,6 @@
 package h7.interface3.bke.interfaces;
 
-public interface Model {
+public interface IBKEModel {
 	public final static char PLAYER1 = 'X';
 	public final static char PLAYER2 = 'O';
 	public final static int FIELDCOUNT = 9;

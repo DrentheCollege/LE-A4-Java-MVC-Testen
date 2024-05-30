@@ -1,14 +1,13 @@
 package h7.interface3.bke.models;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import h7.interface3.bke.interfaces.Model;
+import h7.interface3.bke.interfaces.IBKEModel;
 
 class BKEModelTest {
-	Model model;
+	IBKEModel model;
 	
 	@BeforeEach
 	void beforeEach() {
@@ -17,11 +16,11 @@ class BKEModelTest {
 	
 	@Test
 	void testGetSetCurrentPlayer() {
-		assertEquals(Model.PLAYER1, model.getCurrentPlayer(), "Eerste speler");	
-		model.setCurrentPlayer(Model.PLAYER2);
-		assertEquals(Model.PLAYER2, model.getCurrentPlayer(), "Aanpassen speler");	
+		assertEquals(IBKEModel.PLAYER1, model.getCurrentPlayer(), "Eerste speler");	
+		model.setCurrentPlayer(IBKEModel.PLAYER2);
+		assertEquals(IBKEModel.PLAYER2, model.getCurrentPlayer(), "Aanpassen speler");	
 		model.setCurrentPlayer('t');
-		assertEquals(Model.PLAYER2, model.getCurrentPlayer(), "Ongeldige speler");	
+		assertEquals(IBKEModel.PLAYER2, model.getCurrentPlayer(), "Ongeldige speler");	
 	}
 	
 	@Test
@@ -68,13 +67,13 @@ class BKEModelTest {
 	void testReset() {
 		//zet 2 velden in het model
 		model.setField(1);
-		model.setCurrentPlayer(Model.PLAYER2);
+		model.setCurrentPlayer(IBKEModel.PLAYER2);
 		model.setField(2);
 		assertEquals(2, model.getTurns(), "2 beurten");
 		
 		model.reset();
 		//alle velden moeten leeg zijn en huidige speler PLAYER1
-		assertEquals(Model.PLAYER1, model.getCurrentPlayer(),"Speler 1");
+		assertEquals(IBKEModel.PLAYER1, model.getCurrentPlayer(),"Speler 1");
 		assertEquals(0, model.getTurns(), "0 beurten");
 		for(char check: model.getFields()) {
 			assertEquals(0, check, "Veld is niet leeg");

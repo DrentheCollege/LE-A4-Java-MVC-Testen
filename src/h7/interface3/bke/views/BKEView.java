@@ -3,20 +3,18 @@ package h7.interface3.bke.views;
 import javax.swing.*;
 
 import h7.interface3.bke.controllers.BKEController;
-import h7.interface3.bke.interfaces.Controller;
+import h7.interface3.bke.interfaces.IBKEController;
 import h7.interface3.bke.models.BKEModel;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.*;
+import java.beans.*;
 
 public class BKEView extends JFrame implements PropertyChangeListener {
 	
 	JLabel jlresultaat = new JLabel("resultaat");
 	JPanel pButtons;
-	private Controller controller;
+	private IBKEController controller;
 	
 	public BKEView() {
 		JPanel content = new JPanel();
@@ -27,7 +25,7 @@ public class BKEView extends JFrame implements PropertyChangeListener {
 		content.add(pButtons);
 		for (int i=0; i<BKEModel.FIELDCOUNT; i++) {
 			BKEButton jb = new BKEButton(i);
-			jb.addActionListener(new MyButtonClick());
+			jb.addActionListener(new BKEButtonClick());
 			pButtons.add(jb);
 		}
 		
@@ -41,7 +39,7 @@ public class BKEView extends JFrame implements PropertyChangeListener {
 		this.setVisible(true);
 	}
 
-	public void setController(Controller controller) {
+	public void setController(IBKEController controller) {
 		this.controller = controller;
 	}
 
@@ -64,7 +62,7 @@ public class BKEView extends JFrame implements PropertyChangeListener {
 		}
 	}
 	
-	class MyButtonClick implements ActionListener{
+	class BKEButtonClick implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

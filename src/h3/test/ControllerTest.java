@@ -6,28 +6,18 @@ import org.junit.jupiter.api.Test;
 class ControllerTest {
 
 	@Test
-	public void testIncrease() {
+	public void testDoIncrease() {
 		Controller controller = new Controller();
 
 		int oldValue = controller.model.getCounter();
-		controller.increase();
+		controller.doIncrease();
 
 		int newValue = controller.model.getCounter();
 		assertEquals(oldValue + 1, newValue);
 
 		// ik verwacht dat de waarde veranderd en dus niet hetzelfde blijft.
-		controller.increase();
+		controller.doIncrease();
 		assertNotEquals(oldValue + 1, controller.model.getCounter());
-	}
-
-	@Test
-	public void testReset() {
-		Controller controller = new Controller();
-
-		controller.model.setCounter(1);
-		assertNotEquals(0, controller.model.getCounter());
-		controller.reset();
-		assertEquals(0, controller.model.getCounter());
 	}
 
 }

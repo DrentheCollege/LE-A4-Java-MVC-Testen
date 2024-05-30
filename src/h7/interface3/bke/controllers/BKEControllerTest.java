@@ -15,7 +15,7 @@ import h7.interface3.bke.models.BKEModel;
 class BKEControllerTest {
 
 	BKEController controller;
-	Model model;
+	IBKEModel model;
 
 	@BeforeEach
 	void beforeEach() {
@@ -58,8 +58,8 @@ class BKEControllerTest {
 		// eerste klik:
 		controller.setClicked(testId);
 		// zijn button aanpassing en resultaat verstuurd?
-		assertEquals(Model.PLAYER1, pclTest.values.get(BKEController.BUTTON + testId).charAt(0));
-		assertEquals(BKEController.TURNS + ": 1 " + BKEController.PLAYER + ": " + Model.PLAYER2,
+		assertEquals(IBKEModel.PLAYER1, pclTest.values.get(BKEController.BUTTON + testId).charAt(0));
+		assertEquals(BKEController.TURNS + ": 1 " + BKEController.PLAYER + ": " + IBKEModel.PLAYER2,
 				pclTest.values.get(BKEController.RESULT));
 
 		testId = 4;
@@ -67,27 +67,20 @@ class BKEControllerTest {
 		controller.setClicked(testId);
 		// zijn button aanpassing en resultaat verstuurd?
 		// eerste assert test ook impliciet de wisseling van speler
-		assertEquals(Model.PLAYER2, pclTest.values.get(BKEController.BUTTON + testId).charAt(0));
-		assertEquals(BKEController.TURNS + ": 2 " + BKEController.PLAYER + ": " + Model.PLAYER1,
+		assertEquals(IBKEModel.PLAYER2, pclTest.values.get(BKEController.BUTTON + testId).charAt(0));
+		assertEquals(BKEController.TURNS + ": 2 " + BKEController.PLAYER + ": " + IBKEModel.PLAYER1,
 				pclTest.values.get(BKEController.RESULT));
 	}
 
 	@Test
 	void testChangePlayer() {
-		assertEquals(Model.PLAYER1, model.getCurrentPlayer(), "Eerste speler");
+		assertEquals(IBKEModel.PLAYER1, model.getCurrentPlayer(), "Eerste speler");
 		controller.changePlayer();
-		assertEquals(Model.PLAYER2, model.getCurrentPlayer(), "Speler wisselen");
+		assertEquals(IBKEModel.PLAYER2, model.getCurrentPlayer(), "Speler wisselen");
 		controller.changePlayer();
-		assertEquals(Model.PLAYER1, model.getCurrentPlayer(), "2e speler wisseling");
+		assertEquals(IBKEModel.PLAYER1, model.getCurrentPlayer(), "2e speler wisseling");
 	}
 	
-	class TestModel extends BKEModel {
-		
-		public TestModel(char[] workingSet) {
-			fields = workingSet;
-		}
-	}
-
 	@Test
 	void testGetGameOver() {
 		// gelijk spel
@@ -97,7 +90,7 @@ class BKEControllerTest {
 		int[] nonWinningSet = { 4, 0, 1, 7, 6, 2, 3, 5, 8 };
 		
 		// vul velden vanuit nonWinningSet
-		for (int i = 0; i < Model.FIELDCOUNT; i++) {
+		for (int i = 0; i < IBKEModel.FIELDCOUNT; i++) {
 			// controleer of gameOver is
 			assertEquals(false, controller.isGameOver(), "Game over = false");
 			controller.setClicked(nonWinningSet[i]);
@@ -106,7 +99,7 @@ class BKEControllerTest {
 		}
 		// aantal beurten is maximaal dus gameOver
 		assertEquals(true, controller.isGameOver(), "Game over = true");
-		assertEquals(Model.FIELDCOUNT, model.getTurns());
+		assertEquals(IBKEModel.FIELDCOUNT, model.getTurns());
 	}
 
 	@Test
@@ -117,7 +110,7 @@ class BKEControllerTest {
 		controller.setClicked(2);
 		controller.setClicked(6);
 
-		assertEquals(Model.PLAYER1, controller.getWinner(), "Eerste kolom");
+		assertEquals(IBKEModel.PLAYER1, controller.getWinner(), "Eerste kolom");
 		assertEquals(true, controller.isGameOver(), "Game over = true");
 	}
 
@@ -129,7 +122,7 @@ class BKEControllerTest {
 		controller.setClicked(5);
 		controller.setClicked(7);
 
-		assertEquals(Model.PLAYER1, controller.getWinner(), "Tweede kolom");
+		assertEquals(IBKEModel.PLAYER1, controller.getWinner(), "Tweede kolom");
 		assertEquals(true, controller.isGameOver(), "Game over = true");
 	}
 
@@ -141,7 +134,7 @@ class BKEControllerTest {
 		controller.setClicked(4);
 		controller.setClicked(8);
 
-		assertEquals(Model.PLAYER1, controller.getWinner(), "Derde kolom");
+		assertEquals(IBKEModel.PLAYER1, controller.getWinner(), "Derde kolom");
 		assertEquals(true, controller.isGameOver(), "Game over = true");
 	}
 	
@@ -153,7 +146,7 @@ class BKEControllerTest {
 		controller.setClicked(4);
 		controller.setClicked(2);
 
-		assertEquals(Model.PLAYER1, controller.getWinner(), "Eerste rij");
+		assertEquals(IBKEModel.PLAYER1, controller.getWinner(), "Eerste rij");
 		assertEquals(true, controller.isGameOver(), "Game over = true");
 	}
 
@@ -165,7 +158,7 @@ class BKEControllerTest {
 		controller.setClicked(7);
 		controller.setClicked(5);
 
-		assertEquals(Model.PLAYER1, controller.getWinner(), "Tweede rij");
+		assertEquals(IBKEModel.PLAYER1, controller.getWinner(), "Tweede rij");
 		assertEquals(true, controller.isGameOver(), "Game over = true");
 	}	
 	
@@ -177,7 +170,7 @@ class BKEControllerTest {
 		controller.setClicked(1);
 		controller.setClicked(8);
 
-		assertEquals(Model.PLAYER1, controller.getWinner(), "Derde rij");
+		assertEquals(IBKEModel.PLAYER1, controller.getWinner(), "Derde rij");
 		assertEquals(true, controller.isGameOver(), "Game over = true");
 	}
 	
@@ -189,7 +182,7 @@ class BKEControllerTest {
 		controller.setClicked(2);
 		controller.setClicked(8);
 
-		assertEquals(Model.PLAYER1, controller.getWinner(), "Diagonaal 1");
+		assertEquals(IBKEModel.PLAYER1, controller.getWinner(), "Diagonaal 1");
 		assertEquals(true, controller.isGameOver(), "Game over = true");
 	}
 
@@ -201,7 +194,7 @@ class BKEControllerTest {
 		controller.setClicked(1);
 		controller.setClicked(6);
 
-		assertEquals(Model.PLAYER1, controller.getWinner(), "Diagonaal 2");
+		assertEquals(IBKEModel.PLAYER1, controller.getWinner(), "Diagonaal 2");
 		assertEquals(true, controller.isGameOver(), "Game over = true");
 	}
 	

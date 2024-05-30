@@ -1,8 +1,8 @@
 package h7.interface3.bke.models;
 
-import h7.interface3.bke.interfaces.Model;
+import h7.interface3.bke.interfaces.IBKEModel;
 
-public class BKEModel implements Model {
+public class BKEModel implements IBKEModel {
 	protected char[] fields = new char[FIELDCOUNT];
 	private char currentPlayer = PLAYER1;
 

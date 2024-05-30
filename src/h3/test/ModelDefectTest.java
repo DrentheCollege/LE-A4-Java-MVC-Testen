@@ -1,22 +1,23 @@
 package h3.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ModelTest {
-	
+public class ModelDefectTest extends ModelTest {
 	
 	@Test
 	public void testCreate() {
-		Model model = new Model();	
-	
+		ModelDefect model = new ModelDefect();	
+		
 		assertEquals("Create test", Integer.valueOf(0), model.counter);
 	}
 
 	@Test
 	public void testGetter() {
-		Model model = new Model();	
+		ModelDefect model = new ModelDefect();	
 		
 		model.counter = 14;
 
@@ -25,8 +26,8 @@ class ModelTest {
 	
 	@Test
 	public void testIncrease() {
-		Model model = new Model();	
-
+		ModelDefect model = new ModelDefect();	
+		
 		int oldValue = model.getCounter();
 		model.increase();
 
@@ -37,7 +38,5 @@ class ModelTest {
 		model.increase();
 		assertNotEquals(oldValue + 1, model.getCounter());
 	}
-	
-
 
 }

@@ -3,21 +3,14 @@ package h7.interface3.bke.controllers;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import h7.interface3.bke.interfaces.Controller;
-import h7.interface3.bke.interfaces.Model;
+import h7.interface3.bke.interfaces.IBKEController;
+import h7.interface3.bke.interfaces.IBKEModel;
 import h7.interface3.bke.models.BKEModel;
 
-public class BKEController implements Controller {
+public class BKEController implements IBKEController {
 
 	PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-	private Model model;
-
-	public final static String BUTTON = "button";
-	public final static String RESULT = "result";
-	public static final String FINISHED = "Game over";
-	public static final String TURNS = "Beurt";
-	public static final String PLAYER = "Speler";
-	public static final String WINNERIS = "Winnaar is";
+	private IBKEModel model;
 
 	@Override
 	public void addPropertyChangeListener(PropertyChangeListener view) {
@@ -25,7 +18,7 @@ public class BKEController implements Controller {
 	}
 
 	@Override
-	public void setModel(Model model) {
+	public void setModel(IBKEModel model) {
 		this.model = model;
 	}
 
@@ -71,6 +64,11 @@ public class BKEController implements Controller {
 		return model.getTurns() >= BKEModel.FIELDCOUNT;
 	}
 
+	public void reset() {
+		model.reset();
+		displayGameStatus();
+	}
+
 	protected char getWinner() {
 		char[] fields = model.getFields();
 		char winner = 0;
@@ -102,11 +100,6 @@ public class BKEController implements Controller {
 		}
 
 		return winner;
-	}
-
-	public void reset() {
-		model.reset();
-		displayGameStatus();
 	}
 
 }

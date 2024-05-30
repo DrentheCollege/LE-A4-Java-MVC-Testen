@@ -1,28 +1,18 @@
 package h1.variant1;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
-
-public class Controller extends JPanel {
+public class Controller {
 	
-	JButton clickButton;
-	private View view;
 	private Model model;
+	private View view;
 
-	public Controller() {
-		model = new Model();
-		view = new View();
-		this.add(view);
-		
-		clickButton = new JButton("+1");
-		clickButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.setCounter(model.getCounter()+1);
-				view.setDisplay(model.getCounter().toString());
-			}
-		});
-		this.add(clickButton);
+	public Controller(View view) {
+		this.model = new Model();
+		this.view  = view;
+	
+	}
+
+	public void doIncrease() {
+		model.increase();
+		view.setDisplay(model.getCounter().toString());
 	}
 }
